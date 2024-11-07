@@ -2,7 +2,6 @@ package com.example.demo.customer;
 
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.CustomerNotFoundException;
@@ -11,8 +10,6 @@ import jakarta.validation.Valid;
 
 @Service
 public class CustomerService {
-    @Value("${emailRegex}")
-    private String emailRegex;
 
     private final CustomerRepository repository;
 
