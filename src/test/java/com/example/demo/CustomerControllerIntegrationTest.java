@@ -47,12 +47,7 @@ class CustomerControllerIntegrationTest {
 
     @Test
     void testGetCustomer() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(testCustomer)))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-        Customer createdCustomer = objectMapper.readValue(response, Customer.class);
+        Customer createdCustomer = objectMapper.readValue(createTestUserInDB(), Customer.class);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/customers/" + createdCustomer.getId()))
                 .andExpect(status().isOk())
@@ -63,12 +58,7 @@ class CustomerControllerIntegrationTest {
 
     @Test
     void testUpdateCustomer() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(testCustomer)))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-        Customer createdCustomer = objectMapper.readValue(response, Customer.class);
+        Customer createdCustomer = objectMapper.readValue(createTestUserInDB(), Customer.class);
 
         CustomerDTO updatedCustomer = new CustomerDTO("Jane", "Doe", "jane.doe@lhv.com");
 
@@ -83,17 +73,21 @@ class CustomerControllerIntegrationTest {
 
     @Test
     void testDeleteCustomer() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(testCustomer)))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-        Customer createdCustomer = objectMapper.readValue(response, Customer.class);
+        Customer createdCustomer = objectMapper.readValue(createTestUserInDB(), Customer.class);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/customers/" + createdCustomer.getId()))
                 .andExpect(status().isOk());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/customers/" + createdCustomer.getId()))
                 .andExpect(status().isNotFound());
+    }
+
+    private String createTestUserInDB() throws Exception {
+        String response = mockMvc.perform(MockMvcRequestBuilders.post("/customers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(testCustomer)))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        return response;
     }
 }
