@@ -10,8 +10,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.example.demo.customer.Customer;
-import com.example.demo.customer.CustomerDTO;
+import com.example.demo.dto.CustomerDTO;
+import com.example.demo.model.Customer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.transaction.Transactional;

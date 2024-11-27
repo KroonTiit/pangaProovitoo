@@ -10,10 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.example.demo.customer.Customer;
-import com.example.demo.customer.CustomerController;
-import com.example.demo.customer.CustomerDTO;
-import com.example.demo.customer.CustomerService;
+import com.example.demo.controller.CustomerController;
+import com.example.demo.dto.CustomerDTO;
+import com.example.demo.model.Customer;
+import com.example.demo.service.CustomerService;
 
 public class CustomerServiceUnitTest {
     @Mock

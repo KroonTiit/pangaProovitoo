@@ -1,4 +1,7 @@
-package com.example.demo.customer;
+package com.example.demo.controller;
+
+import java.util.Collections;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,15 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.CustomerNotFoundException;
+import com.example.demo.dto.CustomerDTO;
+import com.example.demo.exceprions.CustomerNotFoundException;
+import com.example.demo.model.Customer;
+import com.example.demo.service.CustomerService;
 
 import jakarta.validation.Valid;
 
 
-import org.springframework.transaction.annotation.Transactional;
 
 @CrossOrigin(origins = "http://localhost:3000")
-@Transactional
 @RestController
 @RequestMapping("/")
 public class CustomerController {
@@ -53,9 +57,9 @@ public class CustomerController {
         return customerService.findCustomer(id);
     }
 
-    @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleCustomerNotFound(CustomerNotFoundException ex) {
-        return ex.getMessage();
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public Map<String,String> handleCustomerNotFound(CustomerNotFoundException ex) {
+        return Collections.singletonMap("error", ex.getMessage());
     }
 }

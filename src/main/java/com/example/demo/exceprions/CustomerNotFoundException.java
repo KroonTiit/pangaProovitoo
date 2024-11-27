@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.exceprions;
 
 public class CustomerNotFoundException extends RuntimeException {
     public CustomerNotFoundException(Long id) {

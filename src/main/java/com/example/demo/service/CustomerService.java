@@ -1,10 +1,14 @@
-package com.example.demo.customer;
+package com.example.demo.service;
 
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.CustomerNotFoundException;
+import com.example.demo.dto.CustomerDTO;
+import com.example.demo.dto.mapper.CustomerMapper;
+import com.example.demo.exceprions.CustomerNotFoundException;
+import com.example.demo.model.Customer;
+import com.example.demo.repository.CustomerRepository;
 
 import jakarta.validation.Valid;
 
@@ -22,22 +26,13 @@ public class CustomerService {
     }
 
     public Customer updateCustomer(Long id, CustomerDTO customerDTO) {
-        Customer customer = findCustomer(id);
-        customer.setFirstName(customerDTO.getFirstName());
-        customer.setLastName(customerDTO.getLastName());
-        customer.setEmail(customerDTO.getEmail());
-        customer.setModifiedDtime(LocalDateTime.now());
-
-        return repository.save(customer);
+        CustomerMapper customerMapper = new CustomerMapper();
+        return repository.save(customerMapper.mapToModel(customerDTO, LocalDateTime.now()));
     }
 
     public Customer addCustomer(@Valid CustomerDTO customerDTO) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDTO.getFirstName());
-        customer.setLastName(customerDTO.getLastName());
-        customer.setEmail(customerDTO.getEmail());
-
-        return repository.save(customer);
+        CustomerMapper customerMapper = new CustomerMapper();
+        return repository.save(customerMapper.mapToModel(customerDTO));
     }
 
     public Customer findCustomer(Long id){
