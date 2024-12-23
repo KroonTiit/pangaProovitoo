@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDTO;
-import com.example.demo.exceprions.CustomerNotFoundException;
+import com.example.demo.exceptions.CustomerNotFoundException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.CustomerService;
 

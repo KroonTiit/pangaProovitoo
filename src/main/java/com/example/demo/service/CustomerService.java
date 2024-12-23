@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.CustomerDTO;
 import com.example.demo.dto.mapper.CustomerMapper;
-import com.example.demo.exceprions.CustomerNotFoundException;
+import com.example.demo.exceptions.CustomerNotFoundException;
 import com.example.demo.model.Customer;
 import com.example.demo.repository.CustomerRepository;
 
